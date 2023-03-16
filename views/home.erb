@@ -1,0 +1,10 @@
+<div class="container">
+    <% @users.each do |user| %>
+    <h1>Welcome <%= user.role ? "admin" : "user" %> <%= user.username %></h1>
+    <% end %>
+    <div class="col-lg-8">
+                
+    </div>
+    <p><a href="/edit">edit</a></p>
+    <p><a href="/logout">logout</a></p>
+</div>

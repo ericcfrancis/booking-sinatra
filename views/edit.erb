@@ -1,0 +1,22 @@
+<!-- login form -->
+<div class="container">
+<% @users.each do |user| %>
+    
+    <div class="row justify-content-center">
+        <div class="col-lg-4 border rounded mt-5 bg-light">
+            <h3 class="text-center">Update profile</h3>
+
+            <form action="/" method="post">
+                <div class="form-group p-3 m-1">
+                    <label for="">Username</label>
+                    <input type="text" class="form-control" value="<%= user.username %>" name="username" required>
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" name="password" required placeholder="Enter your password here">
+                    <button class="btn btn-primary mt-3 form-control" type="submit">Update</button>                    
+                </div> 
+            </form>
+
+        </div>
+    </div>
+    <% end %>
+</div>

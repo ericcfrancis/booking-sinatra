@@ -1,36 +1,22 @@
 
-<div class="my-3 text-center ">
-    <h1>Welcome to Digital Hub Management System</h1>
-</div>
-<div class="container mt-3 ">
-    <div class="col-lg-12 justify-content-center">
-        <div class="row justify-content-center">
-            <h3>Admin</h3>
-            <div class="col-lg-5 rounded m-1">
-                <h5>List of rooms</h5>
-                
-            </div>
-            <div class="col-lg-5 border rounded m-1">
-                <h5>Add a new room</h5>
+<!-- login form -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 border rounded mt-5 bg-light">
+            <h3 class="text-center">Login</h3>
 
-                <form method="post" action="/room" class="my-1">
+            <form action="/login" method="post">
+                <div class="form-group p-3 m-1">
+                    <label for="">Username</label>
+                    <input type="text" class="form-control" name="username" required>
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                    <button class="btn btn-primary mt-3 form-control" type="submit">Login</button>
+                    <p><a href="/regpage">Register</a></p>
+                </div> 
+            </form>
 
-                    <label for="room_name">Room Name:</label><br>
-                    <input type="text" class="form-control" placeholder="Room name" name="room_name">
-
-                    <label for="">Rate</label>
-                    <input type="text" class="form-control" placeholder="Rate" name="room_rate">
-
-                    <label for="">Capacity</label>
-                    <input type="text" class="form-control mb-3" placeholder="Capacity" name="room_capacity">
-
-                    <button type="submit" class="btn btn-primary">Save</button>
-
-                </form>
-
-
-            </div>            
         </div>
-        
     </div>
 </div>
+
