@@ -16,6 +16,8 @@ class MainController < Sinatra::Base
         erb :index
     end
 
+    ## USER START ##
+
     #login form
     post '/login' do
         username = params[:username]
@@ -41,15 +43,12 @@ class MainController < Sinatra::Base
     #register form
     post '/register' do
         username = params[:username]
-        role = params[:role]
         password = params[:password]
+        # role = params[:role]
 
-        is_admin = role == '1'
-
-        user = User.new(username: username, role: role, password:password)
+        user = User.new(username: username, password:password)
 
         user.save
-
         redirect '/'
     end
 
@@ -80,6 +79,7 @@ class MainController < Sinatra::Base
         if session[:logged_in]
             #find logged in user data
             @users = User.where(id: session[:user_id])
+            @rooms = Room.all
             erb :home
         else
             redirect '/'
@@ -87,16 +87,16 @@ class MainController < Sinatra::Base
     end
 
     #go to edit profile form
-    get '/edit' do
+    get '/edit/:id' do
         @users = User.where(id: session[:user_id])
         erb :edit
     end
 
     #update profile
-    post '/update' do
+    post '/update/:id' do
         username = params[:username]
         password = params[:password]
-        user_id = params[:user_id]
+        user_id = params[:id]        
 
         user = User.find_by(id: user_id)
 
@@ -106,45 +106,57 @@ class MainController < Sinatra::Base
             else
                 redirect '/home'
             end
-        else
-            # handle the case where the update was not successful
+        else            
             erb :error, locals: { message: 'Failed to update profile' }
         end
     end
-    # post '/update' do
-    #     username = params[:username]
-    #     password = params[:password]
-    #     user_id = params[:user_id]
 
-    #     user = User.where(id: user_id)
-
-    #     user.update(username: username, password: password)
-
-    #     if user.role
-    #         redirect '/admin'
-    #     else
-    #         redirect '/home'
-    #     end
-    # end
-
-    #CREATE
-    post '/room' do
-        #capture data input
-        room_name = params[:room_name]
-        room_rate = params[:room_rate]
-        room_capacity = params[:room_capacity]
-        
-        #object room to save data input
-        @room = Room.new(room_name: room_name, room_rate: room_rate, room_capacity: room_capacity)        
-        @room.save
-       
-        begin
-            @room.save!
-            redirect '/'
-          rescue ActiveRecord::RecordInvalid => e
-            puts e.message
-            redirect '/'
-        end
+    #delete profile
+    delete '/delete/:id' do
+        @user = User.find(params[:id])
+        @user.destroy
+        redirect'/'
     end
+
+    ##USER END ##
+    
+
+    #ROOM START ##
+    
+    #add room form
+    get '/add_room' do
+        erb :add_room
+    end
+
+    #create room
+    post '/add' do
+        room_name = params[:room_name]
+        rate = params[:rate]
+        capacity = params[:capacity]
+
+        room = Room.new(room_name: room_name, rate: rate, capacity:capacity)
+
+        room.save
+        redirect '/admin'
+    end
+
+    #view rooms
+    get '/room_list' do
+        @rooms = Room.all
+        erb :room_list
+    end
+
+    ##ROOM END ##
+
+    
+    ##BOOKING START ##
+
+    #user booking page
+    get '/book_room/:id' do
+        @room = Room.find(params[:id])
+        erb :book_room
+    end
+
+    ##BOOKING END ##
     
 end

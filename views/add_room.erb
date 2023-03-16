@@ -1,0 +1,25 @@
+<!-- add room form -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 border rounded mt-5 bg-light">
+            <h3 class="text-center">Add a room</h3>
+
+            <form action="/add" method="post">
+                <div class="form-group p-3 m-1">
+                    <label for="">Room name</label>
+                    <input type="text" class="form-control" name="room_name" required>
+
+                    <label for="">Room rate</label>
+                    <input type="text" class="form-control" name="rate" required>
+
+                    <label for="">Room capacity</label>
+                    <input type="text" class="form-control" name="capacity" required>
+                    
+                    <button class="btn btn-primary mt-3 form-control" type="submit">Confirm</button>
+                    
+                </div> 
+            </form>
+
+        </div>
+    </div>
+</div>

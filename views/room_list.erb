@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Room name</th>
+                        <th>Rate</th>
+                        <th>Capacity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <% @rooms.each do |room| %>
+                <tbody>
+                    <tr>
+                        <td><%= room.room_name %></td>                
+                        <td>RM<%= room.rate %></td>                
+                        <td><%= room.capacity %> people</td>
+                        <td><a href="">edit</a></td>                                                   
+                        <td><a href="">delete</a></td>                                                   
+                    </tr>            
+                </tbody>
+                <% end %>
+            </table>
+        </div>
+    </div>
+    
+    
+</div>
